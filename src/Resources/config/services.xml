@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        https://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service
+                id="firebase-jwt"
+                class="Firebase\JWT\JWT"
+                public="false">
+        </service>
+
+        <service
+                id="authenticator-service"
+                class="Hakam\AuthenticationBundle\Services\JWTTokenAuthenticatorService"
+                public="true">
+            <argument key="$tokenAdapter" type="service" id="token-adapter"/>
+        </service>
+
+        <service id="Hakam\AuthenticationBundle\Services\JWTTokenAuthenticatorService" alias="authenticator-service"/>
+
+        <service
+                id="token-authenticator"
+                class="Hakam\AuthenticationBundle\Security\HakamJWTAuthenticator"
+                public="true">
+            <argument key="$userRepository" type="service" id="Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository"/>
+            <argument key="$authenticatorService" type="service" id="authenticator-service"/>
+        </service>
+
+        <service
+                id="token-adapter"
+                class="Hakam\AuthenticationBundle\Adapters\TokenAdapter"
+                public="true">
+            <argument key="$JWTToken" type="service" id="firebase-jwt"/>
+            <argument key="$publicKeyPath" type="string" id="%env(PUBLIC_KEY_PATH)%"/>
+            <argument key="$privateKeyPath" type="string" id="%env(PRIVATE_KEY_PATH)%"/>
+            <argument key="$authProperty" type="string" id="%env(AUTH_PROPERTY)%"/>
+        </service>
+
+    </services>
+</container>
