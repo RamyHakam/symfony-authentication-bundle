@@ -7,7 +7,6 @@ namespace Hakam\AuthenticationBundle\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class HakamAuthenticationExtension extends Extension
@@ -25,9 +24,5 @@ class HakamAuthenticationExtension extends Extension
         $definition->setArgument(1,$configs['public_path_key']);
         $definition->setArgument(2,$configs['private_path_key']);
         $definition->setArgument(3,$configs['auth_property']);
-
-        $definition = $container->getDefinition('token-authenticator');
-        $definition->setArgument(0, new Reference($configs['user_repository']));
-
         }
 }

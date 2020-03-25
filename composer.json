@@ -1,0 +1,34 @@
+{
+    "name": "ramyhakam/symfony-authentication-bundle",
+    "description": "jwt authenticator bundle for symfony 4/5",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ramy Hakam",
+            "email": "pencilsoft1@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2.5",
+        "symfony/config": "^5.0",
+        "symfony/dependency-injection": "^5.0",
+        "symfony/http-kernel": "^5.0",
+        "symfony/security-bundle": "^5.0.0",
+        "firebase/php-jwt": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hakam\\AuthenticationBundle\\": "src/"
+        }
+    },
+
+    "autoload-dev": {
+        "psr-4": {
+            "Hakam\\AuthenticationBundle\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.0"
+    }
+}

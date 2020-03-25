@@ -19,7 +19,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                ->variableNode('public_path_key')->defaultValue('%kernel.project_dir%/config/jwt/public.pem')->end()
                ->variableNode('private_path_key')->defaultValue('%kernel.project_dir%/config/jwt/private.pem')->end()
-               ->variableNode('user_repository')->info('User repository')->end()
                ->variableNode('auth_property')->defaultValue('apiToken') ->end()
             ->end();
         return $treeBuilder;

@@ -3,12 +3,9 @@
 
 namespace Hakam\AuthenticationBundle\Security;
 
-
-use App\Entity\User;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Component\Security\Core\User\User;
 use Hakam\AuthenticationBundle\Adapters\TokenAdapter;
 use Hakam\AuthenticationBundle\Services\JWTTokenAuthenticatorService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,15 +27,10 @@ class HakamJWTAuthenticator extends  AbstractGuardAuthenticator
      * @var JWTTokenAuthenticatorService
      */
     private $authenticatorService;
-    /**
-     * @var ServiceEntityRepository
-     */
-    private $userRepository;
 
-    public function __construct(ServiceEntityRepository $userRepository,JWTTokenAuthenticatorService $authenticatorService)
+    public function __construct(JWTTokenAuthenticatorService $authenticatorService)
     {
         $this->authenticatorService = $authenticatorService;
-        $this->userRepository = $userRepository;
     }
 
     public function supports(Request $request)
@@ -70,12 +62,10 @@ class HakamJWTAuthenticator extends  AbstractGuardAuthenticator
 
         if(array_values($credentials['userData'])[0] === TokenAdapter::TEMP_TOKEN)
         {
-            return new User();
+            return  new User('tempUser','tempPass');
         }
 
-        // if a User object, checkCredentials() is called
-        return $this->userRepository
-            ->findOneBy($credentials['userData']);
+      return  $userProvider->loadUserByUsername($credentials['userData'[0]]);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

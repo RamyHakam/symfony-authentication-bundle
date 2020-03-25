@@ -23,7 +23,6 @@
                 id="token-authenticator"
                 class="Hakam\AuthenticationBundle\Security\HakamJWTAuthenticator"
                 public="true">
-            <argument key="$userRepository" type="service" id="Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository"/>
             <argument key="$authenticatorService" type="service" id="authenticator-service"/>
         </service>
 
