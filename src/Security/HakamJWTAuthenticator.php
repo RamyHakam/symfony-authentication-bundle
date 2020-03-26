@@ -65,7 +65,7 @@ class HakamJWTAuthenticator extends  AbstractGuardAuthenticator
             return  new User('tempUser','tempPass');
         }
 
-      return  $userProvider->loadUserByUsername($credentials['userData'[0]]);
+      return  $userProvider->loadUserByUsername(array_values($credentials['userData'])[0]);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
