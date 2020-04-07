@@ -8,6 +8,11 @@ namespace Hakam\AuthenticationBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+/**
+ * @category Authentication
+ * @author   Ramy Hakam <pencilsoft1@gmail.com>
+ * @link     https://github.com/RamyHakam/symfony-authentication-bundle
+ */
 class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
@@ -19,7 +24,6 @@ class Configuration implements ConfigurationInterface
             ->children()
                ->variableNode('public_path_key')->defaultValue('%kernel.project_dir%/config/jwt/public.pem')->end()
                ->variableNode('private_path_key')->defaultValue('%kernel.project_dir%/config/jwt/private.pem')->end()
-               ->variableNode('auth_property')->defaultValue('apiToken') ->end()
             ->end();
         return $treeBuilder;
     }

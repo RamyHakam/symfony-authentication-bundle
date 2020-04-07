@@ -33,7 +33,6 @@
             <argument key="$JWTToken" type="service" id="firebase-jwt"/>
             <argument key="$publicKeyPath" type="string" id="%env(PUBLIC_KEY_PATH)%"/>
             <argument key="$privateKeyPath" type="string" id="%env(PRIVATE_KEY_PATH)%"/>
-            <argument key="$authProperty" type="string" id="%env(AUTH_PROPERTY)%"/>
         </service>
 
     </services>

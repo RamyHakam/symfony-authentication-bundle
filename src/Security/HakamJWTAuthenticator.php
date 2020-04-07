@@ -18,7 +18,7 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 /**
  * @category Authentication
  * @author   Ramy Hakam <pencilsoft1@gmail.com>
- * @link     https://github.com/ramyhakam/JWTSymfonyAuthenticator
+ * @link     https://github.com/RamyHakam/symfony-authentication-bundle
  */
 class HakamJWTAuthenticator extends  AbstractGuardAuthenticator
 {
@@ -48,7 +48,7 @@ class HakamJWTAuthenticator extends  AbstractGuardAuthenticator
     {
         return [
             'token' => $this->authenticatorService->decodeUserToken($request->headers->get('Authorization')),
-            'userData' => $this->authenticatorService->getUserDataFromToken($request->headers->get('Authorization'))
+            'apiKey' => $this->authenticatorService->getUserDataFromToken($request->headers->get('Authorization'))
         ];
     }
 
@@ -60,12 +60,12 @@ class HakamJWTAuthenticator extends  AbstractGuardAuthenticator
             return null;
         }
 
-        if(array_values($credentials['userData'])[0] === TokenAdapter::TEMP_TOKEN)
+        if($credentials['apiKey'] === TokenAdapter::TEMP_TOKEN)
         {
             return  new User('tempUser','tempPass');
         }
 
-      return  $userProvider->loadUserByUsername(array_values($credentials['userData'])[0]);
+      return  $userProvider->loadUserByUsername($credentials['apiKey']);
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

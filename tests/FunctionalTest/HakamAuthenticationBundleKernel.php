@@ -8,7 +8,11 @@ use Hakam\AuthenticationBundle\HakamAuthenticationBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
-
+/**
+ * @category Authentication
+ * @author   Ramy Hakam <pencilsoft1@gmail.com>
+ * @link     https://github.com/RamyHakam/symfony-authentication-bundle
+ */
 class HakamAuthenticationBundleKernel extends Kernel
 {
     private $hakamAuthenticationConfig;

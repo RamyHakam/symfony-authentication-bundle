@@ -10,7 +10,7 @@ use Firebase\JWT\JWT;
 /**
  * @category Authentication
  * @author   Ramy Hakam <pencilsoft1@gmail.com>
- * @link     https://github.com/ramyhakam/JWTSymfonyAuthenticator
+ * @link     https://github.com/RamyHakam/symfony-authentication-bundle
  */
 class TokenAdapter implements TokenAdapterInterface
 {
@@ -27,58 +27,44 @@ class TokenAdapter implements TokenAdapterInterface
      * @var string
      */
     private $privateKey;
-    /**
-     * @var string
-     */
-    private $authProperty;
 
     /**
      * TokenAdapter constructor.
      * @param JWT $JWTToken
      * @param string $publicKeyPath
      * @param string $privateKeyPath
-     * @param string $authProperty
      */
-    public function __construct(JWT $JWTToken, string $publicKeyPath, string $privateKeyPath,string $authProperty)
+    public function __construct(JWT $JWTToken, string $publicKeyPath, string $privateKeyPath)
     {
         $this->JWTToken = $JWTToken;
         $this->publicKey = file_get_contents($publicKeyPath);
         $this->privateKey = file_get_contents($privateKeyPath);
-        $this->authProperty = $authProperty?? 'apiToken';
     }
 
     /**
-     * @param array $userData
+     * @param string $apiKey
      * @return string
      */
-    public function encodeToken(array $userData): string
+    public function encodeToken(string $apiKey): string
     {
-        return $this->JWTToken::encode($this->getPayload($userData), $this->privateKey, 'RS256');
+        return $this->JWTToken::encode($this->getPayload($apiKey), $this->privateKey, 'RS256');
     }
 
     /**
      * Generate the token payload using the User object
      * The default expired Date is 1 day after generating the token
-     * @param array $userData
+     * @param string $apiKey
      * @param DateTime $expiredAt
      * @return array
      */
-    private function getPayload(array $userData, DateTime $expiredAt = null): array
+    private function getPayload(string $apiKey, DateTime $expiredAt = null): array
     {
         return [
             "iat" => time(),
             "exp" => $expiredAt? $expiredAt->getTimestamp() : strtotime('+1 day', time()),
             "sub" => "JWT Token For User",
-            'userData' => [$userData]
+            'apiKey' => $apiKey
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthProperty(): string
-    {
-        return $this->authProperty;
     }
 
     /**

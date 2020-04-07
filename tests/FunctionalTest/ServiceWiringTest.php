@@ -9,7 +9,11 @@ use Hakam\AuthenticationBundle\Security\HakamJWTAuthenticator;
 use Hakam\AuthenticationBundle\Services\JWTTokenAuthenticatorService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use PHPUnit\Framework\TestCase;
-
+/**
+ * @category Authentication
+ * @author   Ramy Hakam <pencilsoft1@gmail.com>
+ * @link     https://github.com/RamyHakam/symfony-authentication-bundle
+ */
 class ServiceWiringTest extends TestCase
 {
     /**

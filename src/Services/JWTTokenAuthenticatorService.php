@@ -8,7 +8,7 @@ use Hakam\AuthenticationBundle\Adapters\TokenAdapter;
 /**
  * @category Authentication
  * @author   Ramy Hakam <pencilsoft1@gmail.com>
- * @link     https://github.com/ramyhakam/JWTSymfonyAuthenticator
+ * @link     https://github.com/RamyHakam/symfony-authentication-bundle
  */
 class JWTTokenAuthenticatorService
 {
@@ -33,17 +33,17 @@ class JWTTokenAuthenticatorService
      */
     public function generateUserToken(string $identifierSecretValue = TokenAdapter::TEMP_TOKEN): string
     {
-        return $this->tokenAdapter->encodeToken([$this->tokenAdapter->getAuthProperty() => $identifierSecretValue]);
+        return $this->tokenAdapter->encodeToken($identifierSecretValue);
     }
 
     /**
      * Decode user token to return payload user Data
      * @param string $authorizationToken
-     * @return array|null
+     * @return string|null
      */
-    public function getUserDataFromToken(string $authorizationToken): ?array
+    public function getUserDataFromToken(string $authorizationToken): ?string
     {
-     return  (array)$this->tokenAdapter->decodeToken($authorizationToken)['userData'][0]?? [];
+     return  $this->tokenAdapter->decodeToken($authorizationToken)['apiKey']?? null;
     }
 
     /**

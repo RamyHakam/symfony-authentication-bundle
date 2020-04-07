@@ -4,7 +4,7 @@
 
 Symfony Authentication bundle provides JWT API token authentication for your symfony project with these features:  
 
-  - Generate and validate encrypted JWT token 
+  - Generate and validate RSA encrypted JWT token 
   - Authenticate Login User with the token validation using symfony security
   - Refresh tokens before expiration (later)
 
@@ -20,14 +20,15 @@ $ composer require ramyhakam/symfony-authentication-bundle
  ### Using the Bundle
  1. First, make sure you've followed the main [Security Guide](https://symfony.com/doc/current/security.html) to create your User class. Then, to keep things simple, add an `apiToken` property directly to your User class
  2. Now you have a new entity for your Authentication that implements `Symfony\Component\Security\Core\User\UserInterface;`
- 3. If you have a custom auth property rather than the default `apiToken`, Add it to the configuration file
- 4. Enable the bundle in your `bundle.php` file by adding this line
+ 4. **! This is automatically Done By Symfony Flex:** Enable the bundle in your `bundle.php` file by adding this line
  
      ```php
     return [ 
          //...
     Hakam\AuthenticationBundle\HakamAuthenticationBundle::class => ['all' => true],
     ];
+    ```
+    
  5. Then You need to use the Authenticator as your auth in your firewall by adding these lines in your `packages/security.yml` 
     ```yaml
     #example firewalls
@@ -112,7 +113,6 @@ $ composer require ramyhakam/symfony-authentication-bundle
   hakam_authentication:
       public_path_key:      '%kernel.project_dir%/config/jwt/public.pem'
       private_path_key:     '%kernel.project_dir%/config/jwt/private.pem'
-      auth_property:        apiToken
  ```
              
 ### Contribution
