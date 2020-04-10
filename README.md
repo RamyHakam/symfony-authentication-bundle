@@ -1,5 +1,8 @@
 # Symfony 4/5 API Authentication Bundle  
 ![](https://github.com/RamyHakam/symfony-authentication-bundle/workflows/current_build/badge.svg)
+[![Latest Stable Version](https://poser.pugx.org/ramyhakam/symfony-authentication-bundle/v/stable)](https://packagist.org/packages/ramyhakam/symfony-authentication-bundle)
+[![Total Downloads](https://poser.pugx.org/ramyhakam/symfony-authentication-bundle/downloads)](https://packagist.org/packages/ramyhakam/symfony-authentication-bundle)
+[![License](https://poser.pugx.org/ramyhakam/symfony-authentication-bundle/license)](https://packagist.org/packages/ramyhakam/symfony-authentication-bundle)
 
 
 Symfony Authentication bundle provides JWT API token authentication for your symfony project with these features:  
